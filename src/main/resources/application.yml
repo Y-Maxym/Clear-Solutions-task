@@ -15,3 +15,6 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
+
+user:
+  minAge: ${USER_MIN_AGE}
