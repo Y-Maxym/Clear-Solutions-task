@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class UserRestControllerV1 {
                                         BindingResult bindingResult) {
 
         bindingResultService.handle(bindingResult, UserCreationException::new);
-        userService.createUser(dto);
-        return ResponseEntity.status(201).build();
+        URI location = userService.createUser(dto);
+        return ResponseEntity.created(location).build();
     }
 
     @PatchMapping("/{id}")

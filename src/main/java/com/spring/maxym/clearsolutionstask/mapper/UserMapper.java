@@ -19,7 +19,9 @@ public interface UserMapper {
     @InheritInverseConfiguration
     UserResponseDto toDto(User user);
 
-    @InheritConfiguration
+    @Mapping(target = "createdAt", ignore = true)
+    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "id", ignore = true)
     void updateUserFromDTO(UserUpdateDto dto, @MappingTarget User user);
 
     List<UserResponseDto> toListDto(List<User> users);

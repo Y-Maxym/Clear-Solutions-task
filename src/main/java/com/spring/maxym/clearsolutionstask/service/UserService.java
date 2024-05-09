@@ -11,7 +11,9 @@ import com.spring.maxym.clearsolutionstask.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -47,9 +49,10 @@ public class UserService {
     }
 
     @Transactional
-    public void createUser(UserCreateDto dto) {
+    public URI createUser(UserCreateDto dto) {
         User user = userMapper.toEntityFromCreateDto(dto);
         userRepository.save(user);
+        return generateURI(user.getId());
     }
 
     @Transactional
@@ -67,5 +70,13 @@ public class UserService {
         if (!existsById) throw new UserNotFoundException();
 
         userRepository.deleteById(id);
+    }
+
+    private URI generateURI(Long id) {
+        return  ServletUriComponentsBuilder
+                .fromCurrentRequestUri()
+                .path("/{id}")
+                .buildAndExpand(id)
+                .toUri();
     }
 }
