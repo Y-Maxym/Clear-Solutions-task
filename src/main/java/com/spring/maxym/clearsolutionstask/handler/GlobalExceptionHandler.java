@@ -3,6 +3,8 @@ package com.spring.maxym.clearsolutionstask.handler;
 import com.spring.maxym.clearsolutionstask.error.ErrorEntity;
 import com.spring.maxym.clearsolutionstask.error.SimpleErrorEntity;
 import com.spring.maxym.clearsolutionstask.exception.UserCreationException;
+import com.spring.maxym.clearsolutionstask.exception.UserNotFoundException;
+import com.spring.maxym.clearsolutionstask.exception.UserUpdateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -18,8 +20,20 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
+    @ExceptionHandler(UserUpdateException.class)
+    public ResponseEntity<?> handleException(UserUpdateException exception) {
+        ErrorEntity error = new ErrorEntity(exception.getMessage(), exception.getErrors(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<?> handleException(HttpMessageNotReadableException exception) {
+        SimpleErrorEntity error = new SimpleErrorEntity(exception.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<?> handleException(UserNotFoundException exception) {
         SimpleErrorEntity error = new SimpleErrorEntity(exception.getMessage(), System.currentTimeMillis());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }

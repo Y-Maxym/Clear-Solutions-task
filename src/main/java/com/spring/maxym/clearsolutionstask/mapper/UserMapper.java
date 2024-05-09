@@ -2,19 +2,21 @@ package com.spring.maxym.clearsolutionstask.mapper;
 
 import com.spring.maxym.clearsolutionstask.dto.UserCreateDto;
 import com.spring.maxym.clearsolutionstask.dto.UserResponseDto;
+import com.spring.maxym.clearsolutionstask.dto.UserUpdateDto;
 import com.spring.maxym.clearsolutionstask.entity.User;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.mapstruct.*;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
 
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "id", ignore = true)
-    User toEntity(UserCreateDto dto);
+    User toEntityFromCreateDto(UserCreateDto dto);
 
     @InheritInverseConfiguration
     UserResponseDto toDto(User user);
+
+    @InheritConfiguration
+    void updateUserFromDTO(UserUpdateDto dto, @MappingTarget User user);
 }

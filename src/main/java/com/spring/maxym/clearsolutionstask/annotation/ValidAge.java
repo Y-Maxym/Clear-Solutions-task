@@ -4,7 +4,6 @@ import com.spring.maxym.clearsolutionstask.validator.AgeValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
-import java.lang.annotation.Documented;
 import java.lang.annotation.*;
 
 @Documented
