@@ -33,9 +33,9 @@ public class UserRestControllerV1 {
     }
 
     @GetMapping
-    public ResponseEntity<?> getUsers(@RequestParam(value = "startDate", required = false)
+    public ResponseEntity<?> getUsers(@RequestParam(value = "from", required = false)
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
-                                      @RequestParam(value = "endDate", required = false)
+                                      @RequestParam(value = "to", required = false)
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
         List<UserResponseDto> users = userService.getUsers(startDate, endDate);

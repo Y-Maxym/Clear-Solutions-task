@@ -12,7 +12,7 @@ spring:
     password: ${DATASOURCE_PASSWORD}
 
   liquibase:
-    change-log: db/changelog.sql
+    change-log: db/migration/changelog.sql
 
   jackson:
     property-naming-strategy: SNAKE_CASE
