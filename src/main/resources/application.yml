@@ -2,6 +2,7 @@ spring:
   application:
     name: Clear-Solutions-task
 
+
   config:
     import: optional:file:.env[.properties]
 
@@ -15,6 +16,9 @@ spring:
 
   jackson:
     property-naming-strategy: SNAKE_CASE
+
+  jpa:
+    open-in-view: false
 
 user:
   minAge: ${USER_MIN_AGE}

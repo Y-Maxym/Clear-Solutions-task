@@ -6,6 +6,8 @@ import com.spring.maxym.clearsolutionstask.dto.UserUpdateDto;
 import com.spring.maxym.clearsolutionstask.entity.User;
 import org.mapstruct.*;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
 
@@ -19,4 +21,6 @@ public interface UserMapper {
 
     @InheritConfiguration
     void updateUserFromDTO(UserUpdateDto dto, @MappingTarget User user);
+
+    List<UserResponseDto> toListDto(List<User> users);
 }

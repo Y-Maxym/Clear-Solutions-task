@@ -10,9 +10,13 @@ import com.spring.maxym.clearsolutionstask.service.BindingResultService;
 import com.spring.maxym.clearsolutionstask.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -26,6 +30,16 @@ public class UserRestControllerV1 {
     public ResponseEntity<?> getUserById(@PathVariable("id") Long id) {
         UserResponseDto userDto = userService.getUserById(id);
         return ResponseEntity.status(200).body(userDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getUsers(@RequestParam(value = "startDate", required = false)
+                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                                      @RequestParam(value = "endDate", required = false)
+                                      @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+        List<UserResponseDto> users = userService.getUsers(startDate, endDate);
+        return ResponseEntity.status(200).body(users);
     }
 
     @PostMapping

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -25,6 +26,7 @@ public record UserCreateDto(
         @NotNull(message = "Birth date should not be empty")
         @Past(message = "Birth date must be earlier than current date")
         @ValidAge
+        @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
         LocalDate birthDate,
 
         String address,
