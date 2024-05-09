@@ -38,4 +38,12 @@ public class UserService {
         userMapper.updateUserFromDTO(dto, user);
         userRepository.save(user);
     }
+
+    @Transactional
+    public void deleteUserById(Long id) {
+        boolean existsById = userRepository.existsById(id);
+        if (!existsById) throw new UserNotFoundException();
+
+        userRepository.deleteById(id);
+    }
 }

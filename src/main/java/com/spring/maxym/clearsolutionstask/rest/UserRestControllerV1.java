@@ -38,12 +38,18 @@ public class UserRestControllerV1 {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id,
-                                        @RequestBody @Valid UserUpdateDto dto,
-                                        BindingResult bindingResult) {
+    public ResponseEntity<?> updateUserById(@PathVariable("id") Long id,
+                                            @RequestBody @Valid UserUpdateDto dto,
+                                            BindingResult bindingResult) {
 
         bindingResultService.handle(bindingResult, UserUpdateException::new);
         userService.updateUserById(id, dto);
+        return ResponseEntity.status(204).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUserById(@PathVariable("id") Long id) {
+        userService.deleteUserById(id);
         return ResponseEntity.status(204).build();
     }
 }
