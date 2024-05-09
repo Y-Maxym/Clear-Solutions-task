@@ -22,3 +22,5 @@
 To run the application you need to run the docker-compose file and the application will be deployed in docker on port 8080 with a database, the volume of which will be located in the root folder of the project.
 
 All variables can be controlled from the .env file
+
+By following the link http://localhost:8080/swagger-ui/index.html you can see all available endpoints and test them
