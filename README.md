@@ -23,4 +23,6 @@ To run the application you need to run the docker-compose file and the applicati
 
 All variables can be controlled from the .env file
 
-By following the link http://localhost:8080/swagger-ui/index.html you can see all available endpoints and test them
+By following the [link](http://localhost:8080/swagger-ui/index.html) you can see all available endpoints and test them
+
+Also if you are using Postman for API testing then you can use file [Collection](Clear-Solutions.postman_collection.json) to import the collection for testing endpoints.
