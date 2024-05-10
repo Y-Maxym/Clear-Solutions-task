@@ -11,7 +11,7 @@
 | 2.3 | Update all user fields                                                                                                               | ✅    |
 | 2.4 | Delete user                                                                                                                          | ✅    |
 | 2.5 | Search for users by birth date range. Add the validation which checks that “From” is less than “To”. Should return a list of objects | ✅    |
-| 3   | Code is covered by unit tests using Spring                                                                                           |      |
+| 3   | Code is covered by unit tests using Spring                                                                                           | ✅    |
 | 4   | Code has error handling for REST                                                                                                     | ✅    |
 | 5   | API responses are in JSON format                                                                                                     | ✅    |
 | 6   | Use of database is not necessary. The data persistence layer is not required.                                                        | ✅    |

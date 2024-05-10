@@ -128,4 +128,24 @@ public class DataUtils {
                 "address3",
                 "phone3");
     }
+
+    public static UserCreateDto getJohnDoeDtoToCreateIncorrect() {
+        return new UserCreateDto(
+                "incorrect@mail",
+                "John",
+                "Doe",
+                LocalDate.of(1990, 1, 1),
+                "address1",
+                "phone1");
+    }
+
+    public static UserUpdateDto getJohnDoeDtoToUpdateIncorrect() {
+        return new UserUpdateDto(
+                "updated@incorrect.com",
+                "Updated",
+                "Updated",
+                null,
+                null,
+                null);
+    }
 }
