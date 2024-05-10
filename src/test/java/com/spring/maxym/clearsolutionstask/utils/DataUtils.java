@@ -1,5 +1,8 @@
 package com.spring.maxym.clearsolutionstask.utils;
 
+import com.spring.maxym.clearsolutionstask.dto.UserCreateDto;
+import com.spring.maxym.clearsolutionstask.dto.UserResponseDto;
+import com.spring.maxym.clearsolutionstask.dto.UserUpdateDto;
 import com.spring.maxym.clearsolutionstask.entity.User;
 
 import java.time.LocalDate;
@@ -73,5 +76,56 @@ public class DataUtils {
                 .address("address3")
                 .phoneNumber("phone3")
                 .build();
+    }
+
+    public static UserCreateDto getJohnDoeDtoToCreateTransient() {
+        return new UserCreateDto(
+                "john.doe@gmail.com",
+                "John",
+                "Doe",
+                LocalDate.of(1990, 1, 1),
+                "address1",
+                "phone1");
+    }
+
+    public static UserUpdateDto getJohnDoeDtoToUpdateTransient() {
+        return new UserUpdateDto(
+                "updated@gmail.com",
+                "Updated",
+                "Updated",
+                null,
+                null,
+                null);
+    }
+
+    public static UserResponseDto getJohnDoeResponseDto() {
+        return new UserResponseDto(
+                "john.doe@example.com",
+                "John",
+                "Doe",
+                LocalDate.of(1990, 1, 1),
+                "address1",
+                "phone1");
+    }
+
+
+    public static UserResponseDto getMikeSmithResponseDto() {
+        return new UserResponseDto(
+                "mike.smith@example.com",
+                "Mike",
+                "Smith",
+                LocalDate.of(1994, 1, 1),
+                "address2",
+                "phone2");
+    }
+
+    public static UserResponseDto getFrankJonesResponseDto() {
+        return new UserResponseDto(
+                "frank.jones@example.com",
+                "Frank",
+                "Jones",
+                LocalDate.of(1995, 1, 1),
+                "address3",
+                "phone3");
     }
 }
