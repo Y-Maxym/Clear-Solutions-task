@@ -13,7 +13,7 @@ import static java.util.Objects.isNull;
 public class AgeValidator implements ConstraintValidator<ValidAge, LocalDate> {
 
     @Value("${user.minAge}")
-    private Integer minAge;
+    private Integer minAge = 18;
 
     @Override
     public boolean isValid(LocalDate birthDate, ConstraintValidatorContext context) {

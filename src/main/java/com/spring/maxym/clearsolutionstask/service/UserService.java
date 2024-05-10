@@ -1,82 +1,20 @@
 package com.spring.maxym.clearsolutionstask.service;
 
-import com.spring.maxym.clearsolutionstask.dto.UserCreateDto;
-import com.spring.maxym.clearsolutionstask.dto.UserResponseDto;
-import com.spring.maxym.clearsolutionstask.dto.UserUpdateDto;
 import com.spring.maxym.clearsolutionstask.entity.User;
-import com.spring.maxym.clearsolutionstask.exception.IncorrectDateException;
-import com.spring.maxym.clearsolutionstask.exception.UserNotFoundException;
-import com.spring.maxym.clearsolutionstask.mapper.UserMapper;
-import com.spring.maxym.clearsolutionstask.repository.UserRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
-import static java.util.Objects.isNull;
+public interface UserService {
 
-@Service
-@Transactional(readOnly = true)
-@RequiredArgsConstructor
-public class UserService {
+    User getUserById(Long id);
 
-    private final UserRepository userRepository;
-    private final UserMapper userMapper;
+    List<User> getUsers(LocalDate startDate, LocalDate endDate);
 
-    public UserResponseDto getUserById(Long id) {
-        return userMapper.toDto(userRepository.findById(id)
-                .orElseThrow(UserNotFoundException::new));
-    }
+    URI createUser(User userToCreate);
 
-    public List<UserResponseDto> getUsers(LocalDate startDate, LocalDate endDate) {
-        if (isNull(startDate))
-            startDate = LocalDate.of(1, 1, 1);
-        if (isNull(endDate))
-            endDate = LocalDate.now();
+    void updateUser(User userToUpdate);
 
-        if (startDate.isAfter(endDate))
-            throw new IncorrectDateException("Start date cannot be after end date");
-        else
-            return findAllByBirthDateBetween(startDate, endDate);
-    }
-
-    private List<UserResponseDto> findAllByBirthDateBetween(LocalDate startDate, LocalDate endDate) {
-        return userMapper.toListDto(userRepository.findAllByBirthDateBetween(startDate, endDate));
-    }
-
-    @Transactional
-    public URI createUser(UserCreateDto dto) {
-        User user = userMapper.toEntityFromCreateDto(dto);
-        userRepository.save(user);
-        return generateURI(user.getId());
-    }
-
-    @Transactional
-    public void updateUserById(Long id, UserUpdateDto dto) {
-        User user = userRepository.findById(id)
-                .orElseThrow(UserNotFoundException::new);
-
-        userMapper.updateUserFromDTO(dto, user);
-        userRepository.save(user);
-    }
-
-    @Transactional
-    public void deleteUserById(Long id) {
-        boolean existsById = userRepository.existsById(id);
-        if (!existsById) throw new UserNotFoundException();
-
-        userRepository.deleteById(id);
-    }
-
-    private URI generateURI(Long id) {
-        return  ServletUriComponentsBuilder
-                .fromCurrentRequestUri()
-                .path("/{id}")
-                .buildAndExpand(id)
-                .toUri();
-    }
+    void deleteUserById(Long id);
 }

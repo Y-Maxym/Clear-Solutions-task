@@ -11,7 +11,5 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    boolean existsById(@NonNull Long id);
-
     List<User> findAllByBirthDateBetween(@NonNull LocalDate startDate, @NonNull LocalDate endDate);
 }

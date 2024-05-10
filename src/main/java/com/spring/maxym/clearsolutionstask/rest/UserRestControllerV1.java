@@ -4,8 +4,10 @@ package com.spring.maxym.clearsolutionstask.rest;
 import com.spring.maxym.clearsolutionstask.dto.UserCreateDto;
 import com.spring.maxym.clearsolutionstask.dto.UserResponseDto;
 import com.spring.maxym.clearsolutionstask.dto.UserUpdateDto;
+import com.spring.maxym.clearsolutionstask.entity.User;
 import com.spring.maxym.clearsolutionstask.exception.UserCreationException;
 import com.spring.maxym.clearsolutionstask.exception.UserUpdateException;
+import com.spring.maxym.clearsolutionstask.mapper.UserMapper;
 import com.spring.maxym.clearsolutionstask.service.BindingResultService;
 import com.spring.maxym.clearsolutionstask.service.UserService;
 import jakarta.validation.Valid;
@@ -25,11 +27,15 @@ import java.util.List;
 public class UserRestControllerV1 {
 
     private final UserService userService;
+    private final UserMapper userMapper;
     private final BindingResultService bindingResultService;
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable("id") Long id) {
-        UserResponseDto userDto = userService.getUserById(id);
+
+        User obtainedUser = userService.getUserById(id);
+        UserResponseDto userDto = userMapper.toDto(obtainedUser);
+
         return ResponseEntity.status(200).body(userDto);
     }
 
@@ -39,8 +45,10 @@ public class UserRestControllerV1 {
                                       @RequestParam(value = "to", required = false)
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
 
-        List<UserResponseDto> users = userService.getUsers(startDate, endDate);
-        return ResponseEntity.status(200).body(users);
+        List<User> obtainedUsers = userService.getUsers(startDate, endDate);
+        List<UserResponseDto> listDto = userMapper.toListDto(obtainedUsers);
+
+        return ResponseEntity.status(200).body(listDto);
     }
 
     @PostMapping
@@ -48,7 +56,9 @@ public class UserRestControllerV1 {
                                         BindingResult bindingResult) {
 
         bindingResultService.handle(bindingResult, UserCreationException::new);
-        URI location = userService.createUser(dto);
+
+        User userToCreate = userMapper.toEntityFromCreateDto(dto);
+        URI location = userService.createUser(userToCreate);
         return ResponseEntity.created(location).build();
     }
 
@@ -58,7 +68,11 @@ public class UserRestControllerV1 {
                                             BindingResult bindingResult) {
 
         bindingResultService.handle(bindingResult, UserUpdateException::new);
-        userService.updateUserById(id, dto);
+
+        User obtainedUser = userService.getUserById(id);
+        userMapper.updateUserFromDTO(dto, obtainedUser);
+        userService.updateUser(obtainedUser);
+
         return ResponseEntity.status(204).build();
     }
 
