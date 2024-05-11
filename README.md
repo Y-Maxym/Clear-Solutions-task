@@ -24,7 +24,7 @@ To run the application you need to run the docker-compose file and the applicati
 <br>
 The application image is also present on docker hub under the name ondecember/clear-solutions:1.0
 
-If you don't have docker, then the application is hosted on the link https://clear-solutions-1-0.onrender.com, you can also connect to it.
+If you don't have docker, then the application is hosted on the link https://clear-solutions-1-0.onrender.com, you can also connect to it. You may need to wait a little, because the first request may be a little long
 
 All variables can be controlled from the .env file if you are using local version.
 
