@@ -18,6 +18,7 @@
 | 7   | Any version of Spring Boot. Java version of your choice.                                                                             | ✅    |
 | 8   | You can use Spring Initializer utility to create the project: Spring Initializr.                                                     | ✅    |
 
+## How to test
 
 To run the application you need to run the docker-compose file and the application will be deployed in docker on port 8080 with a database, the volume of which will be located in the root folder of the project.
 <br>
