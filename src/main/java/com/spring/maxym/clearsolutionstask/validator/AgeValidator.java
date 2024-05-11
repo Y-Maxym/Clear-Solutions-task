@@ -3,6 +3,7 @@ package com.spring.maxym.clearsolutionstask.validator;
 import com.spring.maxym.clearsolutionstask.annotation.ValidAge;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.time.Period;
 
 import static java.util.Objects.isNull;
 
+@Slf4j
 public class AgeValidator implements ConstraintValidator<ValidAge, LocalDate> {
 
     @Value("${user.minAge}")
@@ -17,6 +19,7 @@ public class AgeValidator implements ConstraintValidator<ValidAge, LocalDate> {
 
     @Override
     public boolean isValid(LocalDate birthDate, ConstraintValidatorContext context) {
+        log.info("Trying to validate age birth date {}", birthDate);
         if (isNull(birthDate)) return true;
 
         LocalDate today = LocalDate.now();

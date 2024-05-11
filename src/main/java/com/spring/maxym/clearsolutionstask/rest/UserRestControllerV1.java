@@ -12,6 +12,7 @@ import com.spring.maxym.clearsolutionstask.service.BindingResultService;
 import com.spring.maxym.clearsolutionstask.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,7 @@ import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -32,6 +34,7 @@ public class UserRestControllerV1 {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable("id") Long id) {
+        log.info("Trying to get a user with id {}", id);
 
         User obtainedUser = userService.getUserById(id);
         UserResponseDto userDto = userMapper.toDto(obtainedUser);
@@ -44,6 +47,7 @@ public class UserRestControllerV1 {
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
                                       @RequestParam(value = "to", required = false)
                                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+        log.info("Trying to get users by date of birth from {} to {}", startDate, endDate);
 
         List<User> obtainedUsers = userService.getUsers(startDate, endDate);
         List<UserResponseDto> listDto = userMapper.toListDto(obtainedUsers);
@@ -54,6 +58,7 @@ public class UserRestControllerV1 {
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody @Valid UserCreateDto dto,
                                         BindingResult bindingResult) {
+        log.info("Trying to create a user: {}", dto);
 
         bindingResultService.handle(bindingResult, UserCreationException::new);
 
@@ -66,6 +71,7 @@ public class UserRestControllerV1 {
     public ResponseEntity<?> updateUserById(@PathVariable("id") Long id,
                                             @RequestBody @Valid UserUpdateDto dto,
                                             BindingResult bindingResult) {
+        log.info("Trying to update user: {}", dto);
 
         bindingResultService.handle(bindingResult, UserUpdateException::new);
 
@@ -78,6 +84,8 @@ public class UserRestControllerV1 {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteUserById(@PathVariable("id") Long id) {
+        log.info("Trying to delete user by id: {}", id);
+
         userService.deleteUserById(id);
         return ResponseEntity.status(204).build();
     }

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f21c5eac-9497-4b57-8af2-72b1b2668de6",
+		"_postman_id": "78463772-6af7-43d7-b5a8-cdb3260f232e",
 		"name": "Clear-Solutions",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "33298427"
@@ -182,7 +182,7 @@
 		},
 		{
 			"key": "version",
-			"value": "",
+			"value": "v1",
 			"type": "string"
 		}
 	]
