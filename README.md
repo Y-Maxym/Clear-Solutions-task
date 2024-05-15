@@ -24,13 +24,13 @@ To run the application you need to run the docker-compose file and the applicati
 <br>
 The application image is also present on docker hub under the name ondecember/clear-solutions:2.0
 
-If you don't have docker, then the application is hosted on the link https://clear-solutions-1-0.onrender.com, you can also connect to it. You may need to wait a little, because the first request may be a little long
+If you don't have docker, then the application is hosted on the link http://18.199.98.81, you can also connect to it.
 
 All variables can be controlled from the .env file if you are using local version.
 
-By following the [link](http://localhost:8080/swagger-ui/index.html) you can see all available endpoints and test them. If you are using a hosted application, then you need to follow this [link](https://clear-solutions-1-0.onrender.com/swagger-ui/index.html)
+By following the [link](http://localhost:8080/swagger-ui/index.html) you can see all available endpoints and test them. If you are using a hosted application, then you need to follow this [link](http://18.199.98.81/swagger-ui/index.html)
 
-Also if you are using Postman for API testing then you can use file [Collection](Clear-Solutions.postman_collection.json) to import the collection for testing endpoints. If you are using the hosting version, then you need to change the base_url in the collection variables from http://localhost:8080 to https://clear-solutions-1-0.onrender.com
+Also if you are using Postman for API testing then you can use file [Collection](Clear-Solutions.postman_collection.json) to import the collection for testing endpoints. If you are using the hosting version, then you need to change the base_url in the collection variables from http://localhost:8080 to http://18.199.98.81
 ![image](https://github.com/Y-Maxym/Clear-Solutions-task/assets/121685289/349b45a6-dd62-4544-a7bc-acf4ca9ae7a6)
 
 ### Technologies used
@@ -45,6 +45,10 @@ Spring Validation for validating the dto.<br>
 PostgreSQL was used as database and liquibase was also used for easy management of database migration.<br>
 Springdoc openapi for creating enpoints documentation.<br>
 Spring test, H2, JUnit, Mockito, Testcontainers used for writing tests.<br>
+
+Docker for containerization
+AWS RDS for external database hosting
+AWS EC2 for hosting the main application
 
 ### Class descriptions
 
