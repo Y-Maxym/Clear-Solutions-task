@@ -46,9 +46,9 @@ PostgreSQL was used as database and liquibase was also used for easy management 
 Springdoc openapi for creating enpoints documentation.<br>
 Spring test, H2, JUnit, Mockito, Testcontainers used for writing tests.<br>
 
-Docker for containerization
-AWS RDS for external database hosting
-AWS EC2 for hosting the main application
+Docker for containerization<br>
+AWS RDS for external database hosting<br>
+AWS EC2 for hosting the main application<br>
 
 ### Class descriptions
 
