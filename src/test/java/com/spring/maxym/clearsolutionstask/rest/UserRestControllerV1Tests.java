@@ -15,6 +15,7 @@ import com.spring.maxym.clearsolutionstask.service.BindingResultService;
 import com.spring.maxym.clearsolutionstask.service.UserService;
 import com.spring.maxym.clearsolutionstask.utils.DataUtils;
 import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.BDDMockito;
@@ -146,6 +147,7 @@ public class UserRestControllerV1Tests {
         //then
         result.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.equalTo(entity.getId().intValue())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.email", CoreMatchers.is(entity.getEmail())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.first_name", CoreMatchers.is(entity.getFirstName())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.last_name", CoreMatchers.is(entity.getLastName())));
@@ -191,9 +193,11 @@ public class UserRestControllerV1Tests {
         //then
         result.andDo(MockMvcResultHandlers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].id", CoreMatchers.is(user1.getId().intValue())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].email", CoreMatchers.is(user1.getEmail())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].first_name", CoreMatchers.is(user1.getFirstName())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].last_name", CoreMatchers.is(user1.getLastName())))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.[1].id", CoreMatchers.is(user2.getId().intValue())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[1].email", CoreMatchers.is(user2.getEmail())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[1].first_name", CoreMatchers.is(user2.getFirstName())))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[1].last_name", CoreMatchers.is(user2.getLastName())));

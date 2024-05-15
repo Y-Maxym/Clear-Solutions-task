@@ -100,6 +100,7 @@ public class DataUtils {
 
     public static UserResponseDto getJohnDoeResponseDto() {
         return new UserResponseDto(
+                1L,
                 "john.doe@example.com",
                 "John",
                 "Doe",
@@ -111,6 +112,7 @@ public class DataUtils {
 
     public static UserResponseDto getMikeSmithResponseDto() {
         return new UserResponseDto(
+                2L,
                 "mike.smith@example.com",
                 "Mike",
                 "Smith",
@@ -121,6 +123,7 @@ public class DataUtils {
 
     public static UserResponseDto getFrankJonesResponseDto() {
         return new UserResponseDto(
+                3L,
                 "frank.jones@example.com",
                 "Frank",
                 "Jones",
