@@ -22,7 +22,7 @@
 
 To run the application you need to run the docker-compose file and the application will be deployed in docker on port 8080 with a database, the volume of which will be located in the root folder of the project.
 <br>
-The application image is also present on docker hub under the name ondecember/clear-solutions:1.0
+The application image is also present on docker hub under the name ondecember/clear-solutions:2.0
 
 If you don't have docker, then the application is hosted on the link https://clear-solutions-1-0.onrender.com, you can also connect to it. You may need to wait a little, because the first request may be a little long
 
